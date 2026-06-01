@@ -1,0 +1,13 @@
+# Render service definition.
+# The code uses xhtml2pdf, which is pure Python — no native libs needed.
+# So buildCommand is just pip install.
+services:
+  - type: web
+    name: html-to-pdf-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    plan: free
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11"
